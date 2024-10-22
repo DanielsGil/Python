@@ -176,7 +176,6 @@ def decimal_binario(numero):
 #Posiblemente la funcion mas importante del codigo, dibuja los bits como cuadros negros cuando encuentre un 1 en la cadena dada, este es para definir el tamano del mensaje
 def dibujar_cuadrados_bits_tamano(cadena):
     
-
     contador = 0
     j = 500
     aux_j = 480 
@@ -199,7 +198,6 @@ def dibujar_cuadrados_bits_tamano(cadena):
 #Hacemos una funcion por cada tipo de patron
 def patron_vertical_arriba(cadena):
 
-    print(cadena)
     contador = 0
 
     if contador_patrones == 1:
@@ -208,6 +206,12 @@ def patron_vertical_arriba(cadena):
     if contador_patrones == 2:
         j = 500
         k=  280
+    if contador_patrones == 9:
+        j = 420
+        k=  260
+    if contador_patrones == 13:
+        j = 340
+        k=  480
     aux_j = j - 20
 
     for i in cadena:
@@ -224,8 +228,392 @@ def patron_vertical_arriba(cadena):
         
         contador += 1
 
+def patron_3(cadena):
 
+    contador = 0
 
+    j = 500
+    k = 200
+    aux_j = j - 20
+    
+
+    for i in range(4):
+
+        if contador < 2:
+            j -= 20
+        else:
+            j = aux_j
+            k -= 20
+            contador = 0
+            
+        if cadena[i] == '1':
+            dibujar_cuadrado(j,k)
+        
+        contador += 1
+
+    contador = 0
+
+    j = 460
+    k= 180
+
+    aux_j = j - 20
+      
+
+    for i in range(4,8):
+
+        if contador < 2:
+            j -= 20
+        else:
+            j = aux_j
+            k += 20
+            contador = 0
+            
+        if cadena[i] == '1':
+            dibujar_cuadrado(j,k)
+        
+        contador += 1
+
+def patron_vertical_abajo(cadena):
+    contador = 0
+
+  
+    if contador_patrones == 4:
+        j = 460
+        k = 220
+    if contador_patrones == 5:
+        j = 460
+        k = 300
+    if contador_patrones == 6:
+        j = 460
+        k = 380
+    if contador_patrones == 11:
+        j = 380
+        k = 240
+    if contador_patrones == 12:
+        j = 380
+        k = 420
+    aux_j = j - 20
+
+    for i in cadena:
+
+        if contador < 2:
+            j -= 20
+        else:
+            j = aux_j
+            k += 20
+            contador = 0
+            
+        if i == '1':
+            dibujar_cuadrado(j,k)
+        
+        contador += 1
+
+def patron_7(cadena):
+    contador = 0
+
+    j = 460
+    k = 460
+    aux_j = j - 20
+    
+    for i in range(4):
+
+        if contador < 2:
+            j -= 20
+        else:
+            j = aux_j
+            k += 20
+            contador = 0
+            
+        if cadena[i] == '1':
+            dibujar_cuadrado(j,k)
+        
+        contador += 1
+
+    contador = 0
+
+    j = 420
+    k= 480
+
+    aux_j = j - 20
+      
+    for i in range(4,8):
+
+        if contador < 2:
+            j -= 20
+        else:
+            j = aux_j
+            k -= 20
+            contador = 0
+            
+        if cadena[i] == '1':
+            dibujar_cuadrado(j,k)
+        
+        contador += 1
+
+def patron_8(cadena):
+    contador = 0
+
+    
+    j = 420
+    k=  440
+    aux_j = j - 20
+
+    for i in range(4):
+
+        if contador < 2:
+            j -= 20
+        else:
+            j = aux_j
+            k -= 20
+            contador = 0
+            
+        if cadena[i] == '1':
+            dibujar_cuadrado(j,k)
+        
+        contador += 1
+
+    j = 420
+    k=  320
+    aux_j = j - 20
+
+    for i in range(4,8):
+
+        if contador < 2:
+            j -= 20
+        else:
+            j = aux_j
+            k -= 20
+            contador = 0
+            
+        if cadena[i] == '1':
+            dibujar_cuadrado(j,k)
+        
+        contador += 1
+
+def patron_10(cadena):
+    
+    j = 420
+    k=  180
+    aux_j = j - 20
+
+    for i in range(2):
+   
+        j -= 20
+         
+        if cadena[i] == '1':
+            dibujar_cuadrado(j,k)
+
+    contador = 0
+    j = 380
+    k=  180
+    aux_j = j - 20
+
+    for i in range(2,8):
+
+        if contador < 2:
+            j -= 20
+        else:
+            j = aux_j
+            k += 20
+            contador = 0
+            
+        if cadena[i] == '1':
+            dibujar_cuadrado(j,k)
+        
+        contador += 1
+
+def patron_14(cadena):
+        
+    j = 300
+    k = 420
+   
+    for i in range(5):
+
+        k -= 20
+                
+        if cadena[i] == '1':
+            dibujar_cuadrado(j,k)
+   
+    if cadena[5] == '1':
+        dibujar_cuadrado(320,300)
+    if cadena[6] == '1': 
+        dibujar_cuadrado(300,300)
+    if cadena[7] == '1':    
+        dibujar_cuadrado(320,280)             
+        
+def patron_tetris_arriba(cadena):
+
+    if contador_patrones == 15:
+        j = 300
+        k = 280
+
+    if contador_patrones ==17:
+        j = 300
+        k = 100
+
+    if contador_patrones == 25:
+        j = 220
+        k = 440
+
+    if contador_patrones == 26:
+        j = 220
+        k = 360    
+    if cadena[0] == '1':
+        dibujar_cuadrado(j,k)
+    if cadena[7] == '1':
+        dibujar_cuadrado(j+20,k-80)
+    k -= 20
+    j += 40
+    contador = 0
+    aux_j = j - 20
+
+    for i in range(1,7):
+
+        if contador < 2:
+            j -= 20
+        else:
+            j = aux_j
+            k -= 20
+            contador = 0
+            
+        if cadena[i] == '1':
+            dibujar_cuadrado(j,k)
+        
+        contador += 1
+
+def patron_16(cadena):
+    
+    j = 300
+    k = 200
+    if cadena[0] == '1':
+        dibujar_cuadrado(j,k)
+    if cadena[7] == '1':
+        dibujar_cuadrado(j+20,k-100)
+    k -= 20
+    j += 40
+    contador = 0
+    aux_j = j - 20
+
+    for i in range(1,7):
+
+        if contador < 2:
+            j -= 20
+        else:
+            j = aux_j
+            k -= 20
+            contador = 0
+            
+        if cadena[i] == '1':
+            dibujar_cuadrado(j,k)
+        
+        contador += 1
+
+def patron_18(cadena):
+
+    if cadena[0] == '1':
+        dibujar_cuadrado(300, 20)
+    if cadena[1] == '1':
+        dibujar_cuadrado(320, 0)
+    if cadena[2] == '1':
+        dibujar_cuadrado(300, 0)
+    if cadena[3] == '1':
+        dibujar_cuadrado(280, 0)
+    if cadena[4] == '1':
+        dibujar_cuadrado(260, 0)
+    if cadena[5] == '1':
+        dibujar_cuadrado(280, 20)
+    if cadena[6] == '1':
+        dibujar_cuadrado(260, 20)
+    if cadena[7] == '1':
+        dibujar_cuadrado(280, 40)
+
+def patron_19(cadena):
+    
+    j = 260
+    k = 40
+
+    if cadena[0] == '1':
+        dibujar_cuadrado(j,k)
+    if cadena[7] == '1':
+        dibujar_cuadrado(j+20,k+100)
+
+    k += 20
+    j += 40
+    contador = 0
+    aux_j = j - 20
+
+    for i in range(1,7):
+
+        if contador < 2:
+            j -= 20
+        else:
+            j = aux_j
+            k += 20
+            contador = 0
+            
+        if cadena[i] == '1':
+            dibujar_cuadrado(j,k)
+        
+        contador += 1
+
+def patron_tetris_abajo(cadena):
+
+    if contador_patrones == 20:
+        j = 260
+        k = 140
+    if contador_patrones == 21:
+        j = 260
+        k = 220
+    if contador_patrones == 22:
+        j = 260
+        k = 300
+    if contador_patrones == 23:
+        j = 260
+        k = 380
+    if cadena[0] == '1':
+        dibujar_cuadrado(j,k)
+    if cadena[7] == '1':
+        dibujar_cuadrado(j+20,k+80)
+
+    k += 20
+    j += 40
+    contador = 0
+    aux_j = j - 20
+
+    for i in range(1,7):
+
+        if contador < 2:
+            j -= 20
+        else:
+            j = aux_j
+            k += 20
+            contador = 0
+            
+        if cadena[i] == '1':
+            dibujar_cuadrado(j,k)
+        
+        contador += 1
+
+def patron_24(cadena):
+
+    if cadena[0] == '1':
+        dibujar_cuadrado(260, 460)
+    if cadena[1] == '1':
+        dibujar_cuadrado(280, 480)
+    if cadena[2] == '1':
+        dibujar_cuadrado(260, 480)
+    if cadena[3] == '1':
+        dibujar_cuadrado(240, 480)
+    if cadena[4] == '1':
+        dibujar_cuadrado(220, 480)
+    if cadena[5] == '1':
+        dibujar_cuadrado(240, 460)
+    if cadena[6] == '1':
+        dibujar_cuadrado(220, 460)
+    if cadena[7] == '1':
+        dibujar_cuadrado(240, 440)
+
+# Toda la parte de codificar el mensaje e imprimirlo
 def pasar_ascii(cadena):#Creamos la lista con los valores en binario
     
     for i in cadena:
@@ -234,17 +622,48 @@ def pasar_ascii(cadena):#Creamos la lista con los valores en binario
 tam_msj = len(informacion)
 
 mensaje = decimal_binario(tam_msj)
-dibujar_cuadrados_bits_tamano(mensaje)
+dibujar_cuadrados_bits_tamano(mensaje)     
 pasar_ascii(informacion)
 
 for h in lista_binarios:
     if contador_patrones in (1,2,9,13):
         patron_vertical_arriba(h)
+    if contador_patrones == 3:
+        patron_3(h)
+    if contador_patrones in (4,5,6,11,12):
+        patron_vertical_abajo(h)
+    if contador_patrones == 7:
+        patron_7(h)
+    if contador_patrones == 8:
+        patron_8(h)
+    if contador_patrones == 10:
+        patron_10(h)
+    if contador_patrones == 14:
+        patron_14(h)
+    if contador_patrones in (15,17,25,26):
+        patron_tetris_arriba(h)
+    if contador_patrones == 16:
+        patron_16(h)
+    if contador_patrones == 18:
+        patron_18(h)
+    if contador_patrones == 19:
+        patron_19(h)
+    if contador_patrones in (20,21,22,23):
+        patron_tetris_abajo(h)
+    if contador_patrones == 24:
+        patron_24(h)
     contador_patrones += 1
 
+
+def dibujar_cuadricula(canvas, ancho, alto, tam_celda): #Realmente era muy complicado calcular los px sin cuadriculas, esto lo hizo chat gpt
+    
+    for x in range(0, ancho, tam_celda):
+        canvas.create_line(x, 0, x, alto, fill="gray")
+    
+    
+    for y in range(0, alto, tam_celda):
+        canvas.create_line(0, y, ancho, y, fill="gray")
+
+dibujar_cuadricula(canvas, 500, 500, 20)        
+
 pantalla.mainloop()
-
-
-
-
-
