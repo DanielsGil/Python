@@ -1,5 +1,5 @@
 import tkinter as tk
-
+#import reedsolo
 
 informacion = input("Digite un link para generarle un QR: ")
 lista_binarios = [] 
@@ -665,5 +665,23 @@ def dibujar_cuadricula(canvas, ancho, alto, tam_celda): #Realmente era muy compl
         canvas.create_line(0, y, ancho, y, fill="gray")
 
 dibujar_cuadricula(canvas, 500, 500, 20)        
+
+#def calcular_bytes_correcion(mensaje):
+    # Convertir el mensaje en bytes
+    #datos_bytes = [ord(char) for char in mensaje]
+
+    # Configurar Reed-Solomon para obtener 10 bytes de corrección
+    #rs = reedsolo.RSCodec(10)  # Configuramos para generar 10 bytes de corrección
+
+    # Codificar los datos y obtener los bytes de corrección
+    #datos_codificados = rs.encode(bytes(datos_bytes))
+
+    # Los últimos 10 bytes son los bytes de corrección
+    #bytes_correcion = datos_codificados[-10:]
+
+    # Retornar como una lista de enteros
+    #return list(bytes_correcion)
+
+#print(calcular_bytes_correcion(informacion))
 
 pantalla.mainloop()
