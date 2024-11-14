@@ -5,17 +5,17 @@
 
 lista_aux2 = []
 lista_aux = []
-crucigrama = [[] for _ in range(8)]
-lista1 = [1,9,3,4,5,6,7,8,2]
+crucigrama = [[] for _ in range(11)]
+lista1 = [1,2,3,4,5,6,7,8,9,10,11,12]
 
 
 for i in lista1:
     lista_aux2.append(str(i))
     
-for k in range(0,8):
+for k in range(0,11):
   
     lista_aux = []
-    for i in range(9): 
+    for i in range(12): 
         for j in lista1:    
             if str(j) not in lista_aux2[i] and j not in lista_aux: 
                 crucigrama[k].append(j)
