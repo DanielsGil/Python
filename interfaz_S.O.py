@@ -3,10 +3,10 @@ import tkinter as tk
 from tkinter import messagebox
 import time
 import os
-import re
 
 rastreo_on=False
 proceso = None
+texto = None
 
 def ejecutar_bat(script_path):
     try:
@@ -41,6 +41,8 @@ def programar_apagado(entry):
 def iniciar_rastreo(entry):
     #Nombre del archivo
     archivo_bat = "rastreo.bat"
+
+    global texto
     texto = entry.get()
     #Variables a buscar y a modificar
     variable_a_modificar = "set proceso="
@@ -58,26 +60,52 @@ def iniciar_rastreo(entry):
                 linea = f"{variable_a_modificar}{nuevo_valor}\n"
             archivo.write(linea)
     global proceso
-    proceso = subprocess.Popen(['rastreo.bat'], shell=True)
-
+    proceso = subprocess.Popen("rastreo.bat", shell=True)
     
+
 def crear_analisis():
-    archivobat = 'rastreo.bat'
-    variableBuscar = 'tiempo_total'
+    # Archivo que almacena la cantidad de segundos que se uso un proceso
+    archivo_txt = 'tiempo_acumulado.txt'
+    archivo_ps1 = 'crear_excel1.ps1'
+    global texto #Nombre del proceso anteriormente pedido
 
-    # Variable para almacenar el valor de la variable .bat
-    variable = None
+    # Leer el contenido del archivo y guardarlo en una variable
+    with open(archivo_txt, 'r') as archivo:
+        contenido = archivo.read().strip()  
 
-    # Leer el archivo .bat
-    with open(archivobat, 'r') as file:
-        for line in file:
-            # Buscar la línea que contiene la definición de la variable
-            match = re.match(rf'set "{variableBuscar}=(.*)"', line.strip(), re.IGNORECASE)
-            if match:
-                # Obtener el valor de la variable
-                variable = match.group(1)
-                break
-    print(variable)
+    print(contenido)
+    os.remove(archivo_txt)
+    #Modificamos el archivo shell para que tenga los valores del analisis
+
+    variable_a_modificar = "$sheet.Cells.Item(2,2) = "
+    nuevo_valor = contenido
+    
+    with open(archivo_ps1, "r") as archivo:
+        lineas = archivo.readlines()
+
+    #Modificar una línea específica para cambiar lo que se quiere
+    with open(archivo_ps1, "w") as archivo:
+        for linea in lineas:
+            #Si la línea contiene la variable a modificar, reemplaza el valor
+            if linea.startswith(variable_a_modificar):
+                linea = f"{variable_a_modificar}{nuevo_valor}\n"
+            archivo.write(linea)
+
+    variable_a_modificar = "$sheet.Cells.Item(2,1) = "
+    nuevo_valor = f"'{texto}'"
+
+    with open(archivo_ps1, "r") as archivo:
+        lineas = archivo.readlines()
+
+    #Modificar una línea específica para cambiar lo que se quiere
+    with open(archivo_ps1, "w") as archivo:
+        for linea in lineas:
+            #Si la línea contiene la variable a modificar, reemplaza el valor
+            if linea.startswith(variable_a_modificar):
+                linea = f"{variable_a_modificar}{nuevo_valor}\n"
+            archivo.write(linea)
+    ejecutar_bat("crear_excel.bat")
+    
 # Configuración de la ventana de Tkinter
 inicio = tk.Tk()
 inicio.title("PC MANAGER")
@@ -97,7 +125,7 @@ def interfaz_principal():
     c_excelbutton = tk.Button(ventana_principal, text="Proceso de rastreo", width=20, height=3 ,command=interfazRastreo)#Igualamos a lambda para que command nos permita pasar argumentos a la funcion
     c_excelbutton.pack(pady=10)
 
-    copiar_button = tk.Button(ventana_principal, text="Crear copia de seguridad", width=20, height=3 ,command=lambda: ejecutar_bat(r"C:\Users\danie\Desktop\copiar_archivos.bat"))#Igualamos a lambda para que command nos permita pasar argumentos a la funcion
+    copiar_button = tk.Button(ventana_principal, text="Crear copia de seguridad", width=20, height=3 ,command=lambda: subprocess.Popen(f'start cmd /c copiar_archivos.bat', shell=True))#Igualamos a lambda para que command nos permita pasar argumentos a la funcion
     copiar_button.pack(pady=10)
 
     apagar_button = tk.Button(ventana_principal, text="Apagar el ordenador", width=20, height=3 ,command=programarApagado)#Igualamos a lambda para que command nos permita pasar argumentos a la funcion
@@ -119,7 +147,6 @@ def programarApagado():
 
     boton_apagar = tk.Button(apagado, text="Programar Apagado", command=lambda: programar_apagado(entry_hora))
     boton_apagar.pack()
-
 
 def interfazRastreo():
 
@@ -148,7 +175,6 @@ def interfazRastreo():
         boton_FinRastreo = tk.Button(rastreo, text="Finalizar rastreo", command=lambda: [proceso.terminate(),crear_analisis(), rastreo.destroy()])
         boton_FinRastreo.pack()
         rastreo_on=False
-    
     
     
 # Texto
