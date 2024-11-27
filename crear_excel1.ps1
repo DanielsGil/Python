@@ -8,7 +8,7 @@ $sheet = $workbook.Worksheets.Item(1)
 $sheet.Cells.Item(1,1) = 'Nombre del proceso'
 $sheet.Cells.Item(1,2) = 'Tiempo en uso (s)'
 $sheet.Cells.Item(2,1) = 'opera'
-$sheet.Cells.Item(2,2) = 745
+$sheet.Cells.Item(2,2) = 20
 
 # Guarda el archivo
 $file = 'C:\users\danie\desktop\archivo.xlsx'
